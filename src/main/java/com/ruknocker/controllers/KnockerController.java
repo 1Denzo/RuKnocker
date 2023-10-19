@@ -1,4 +1,4 @@
-package com.ruknocker.controller;
+package com.ruknocker.controllers;
 
 public class KnockerController {
 

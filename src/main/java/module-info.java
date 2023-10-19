@@ -9,6 +9,6 @@ module com.ruknocker.ruknocker {
 
     opens com.ruknocker to javafx.fxml;
     exports com.ruknocker;
-    exports com.ruknocker.controller;
-    opens com.ruknocker.controller to javafx.fxml;
+    exports com.ruknocker.controllers;
+    opens com.ruknocker.controllers to javafx.fxml;
 }
