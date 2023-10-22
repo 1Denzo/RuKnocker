@@ -13,4 +13,21 @@ public enum Protocol {
     public int getProtocol() {
         return protoId;
     }
+
+    public static Protocol get(String protocol) {
+        switch (protocol) {
+            case "TCP": return TCP;
+            case "UDP": return UDP;
+            default: return null;
+        }
+    }
+
+    @Override
+    public String toString() {
+        switch (protoId) {
+            case 1: return "TCP";
+            case 2: return "UDP";
+            default: return null;
+        }
+    }
 }

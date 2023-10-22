@@ -12,6 +12,7 @@ public class KnockerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
+        stage.setTitle("RuKnocker");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

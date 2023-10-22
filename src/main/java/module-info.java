@@ -1,4 +1,4 @@
-module com.ruknocker.ruknocker {
+module com.ruknocker {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -10,5 +10,7 @@ module com.ruknocker.ruknocker {
     opens com.ruknocker to javafx.fxml;
     exports com.ruknocker;
     exports com.ruknocker.controllers;
+    exports com.ruknocker.models;
+    opens com.ruknocker.models to javafx.fxml;
     opens com.ruknocker.controllers to javafx.fxml;
 }

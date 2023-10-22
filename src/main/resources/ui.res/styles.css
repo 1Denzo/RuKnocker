@@ -21,3 +21,7 @@
 .button_menu:pressed {
     -fx-background-color: #4C4566;
 }
+
+#portsTable .table-cell {
+    -fx-alignment: CENTER;
+}
