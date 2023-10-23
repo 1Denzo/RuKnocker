@@ -6,6 +6,8 @@ module com.ruknocker {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires com.fasterxml.jackson.databind;
+    requires lombok;
 
     opens com.ruknocker to javafx.fxml;
     exports com.ruknocker;
