@@ -9,10 +9,10 @@ public class Port {
     private SimpleStringProperty port;
     private ComboBox<Protocol> protocols;
 
-    public Port(String port, ObservableList<Protocol> protocols) {
+    public Port(String port, Protocol selectedProto, ObservableList<Protocol> protocols) {
         port = port.isEmpty() ? String.valueOf(0) : port;
         this.port = new SimpleStringProperty(port);
-        initProtocolsComboBox(protocols);
+        initProtocolsComboBox(selectedProto, protocols);
     }
 
     public String getPort() {
@@ -30,9 +30,12 @@ public class Port {
         this.protocols = protocols;
     }
 
-    public void initProtocolsComboBox(ObservableList<Protocol> protocols) {
+    public void initProtocolsComboBox(Protocol selectedProto, ObservableList<Protocol> protocols) {
         this.protocols = new ComboBox<>(protocols);
         this.protocols.setPrefWidth(Double.MAX_VALUE);
-        this.protocols.setValue(this.protocols.getItems().getFirst());
+        if (selectedProto == null)
+            this.protocols.setValue(this.protocols.getItems().getFirst());
+        else
+            this.protocols.setValue(selectedProto);
     }
 }

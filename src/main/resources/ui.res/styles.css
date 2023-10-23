@@ -2,12 +2,24 @@
     -fx-background-color: transparent
 }
 
+.button_save {
+    -fx-background-color: #b9d1c7;
+}
+
 .button:hover {
     -fx-background-color: #DBDBDB;
 }
 
+.button_save:hover {
+    -fx-background-color: #8b9e96;
+}
+
 .button:pressed {
     -fx-background-color: #CBCBCB;
+}
+
+.button_save:pressed {
+    -fx-background-color: #5e6b65;
 }
 
 .button_menu {
