@@ -117,7 +117,11 @@
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="32.0" styleClass="button_menu" stylesheets="@../../ui.res/styles.css">
+                        <Button layoutX="20.0" layoutY="20.0" maxHeight="-Infinity"
+                                maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                prefHeight="32.0" styleClass="button_menu"
+                                stylesheets="@../../ui.res/styles.css"
+                                onAction="#saveConfiguration">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" spacing="10.0">
                                  <children>
@@ -153,7 +157,11 @@
                               <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button layoutX="20.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="32.0" styleClass="button_menu" stylesheets="@../../ui.res/styles.css">
+                        <Button layoutX="20.0" layoutY="71.0" maxHeight="-Infinity"
+                                maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                prefHeight="32.0" styleClass="button_menu"
+                                stylesheets="@../../ui.res/styles.css"
+                                onAction="#openSettings">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" spacing="10.0">
                                  <children>

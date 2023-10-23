@@ -9,8 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class KnockerApplication extends Application {
+    private static Stage mainWindow;
     @Override
     public void start(Stage stage) throws IOException {
+        mainWindow = stage;
         Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
         stage.setTitle("RuKnocker");
         Scene scene = new Scene(root);
@@ -20,5 +22,9 @@ public class KnockerApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static Stage getMainWindow() {
+        return mainWindow;
     }
 }

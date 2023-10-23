@@ -1,5 +1,6 @@
 package com.ruknocker.controllers;
 
+import com.ruknocker.KnockerApplication;
 import com.ruknocker.models.Port;
 import com.ruknocker.models.Protocol;
 import com.ruknocker.services.KnockerService;
@@ -7,14 +8,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,10 +36,12 @@ public class MainController implements Initializable {
 
     private ObservableList<Protocol> protocols;
     private final KnockerService knocker = new KnockerService();
+    private String serverUser;
+    private String serverSshPort;
 
     @FXML
     public void addButtonClick(ActionEvent actionEvent) {
-        ports.add(new Port("", protocols));
+        ports.add(new Port("", null, protocols));
         portsTable.setItems(ports);
     }
 
@@ -51,9 +57,14 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ports = FXCollections.observableArrayList();
         protocols = FXCollections.observableArrayList(Protocol.TCP, Protocol.UDP);
+        loadConfiguration();
         portsColumn.setCellValueFactory(new PropertyValueFactory("port"));
         portsColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         protocolsColumn.setCellValueFactory(new PropertyValueFactory("protocols"));
+    }
+
+    private void loadConfiguration() {
+        
     }
 
     public void portChanged(TableColumn.CellEditEvent<Port, String> portStringCellEditEvent) {
@@ -61,19 +72,38 @@ public class MainController implements Initializable {
         port.setPort(portStringCellEditEvent.getNewValue());
     }
 
-    public void knockStart(ActionEvent actionEvent) {
-        try {
-            for (Port port: ports) {
-                knocker.knock(ipAddress.getText(),
-                        Short.parseShort(port.getPort()),
-                        port.getProtocols()
-                                .getSelectionModel()
-                                .getSelectedItem()
-                                .getProtocol());
-                Thread.currentThread().sleep(1000);
-            }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+    public void knockStart(ActionEvent actionEvent) throws InterruptedException {
+        for (Port port: ports) {
+            knocker.knock(ipAddress.getText(),
+                    Short.parseShort(port.getPort()),
+                    port.getProtocols()
+                            .getSelectionModel()
+                            .getSelectedItem()
+                            .getProtocol());
+            Thread.sleep(1000);
+        }
+    }
+
+    public void saveConfiguration(ActionEvent actionEvent) {
+
+    }
+
+    public void openSettings(ActionEvent actionEvent) throws IOException {
+        var loader = new FXMLLoader(KnockerApplication.class.getResource("SettingsUI.fxml"));
+        Parent root = loader.load();
+        var controller = loader.<SettingsController>getController();
+        controller.setServerUser(serverUser);
+        controller.setServerSshPort(serverSshPort);
+        Stage settingsWindow = new Stage(StageStyle.UTILITY);
+        settingsWindow.setTitle("Настройка соединения");
+        Scene settingsScene = new Scene(root);
+        settingsWindow.setScene(settingsScene);
+        settingsWindow.initModality(Modality.WINDOW_MODAL);
+        settingsWindow.initOwner(KnockerApplication.getMainWindow());
+        settingsWindow.showAndWait();
+        if (controller.isSaved()) {
+            serverUser = controller.getServerUser();
+            serverSshPort = controller.getServerSshPort();
         }
     }
 }
